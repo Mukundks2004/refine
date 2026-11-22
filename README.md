@@ -38,7 +38,8 @@ int sum(int *arr, int n) {
 }
 ```
 
-Supported (planned): integer types, arrays, structs, pointers, functions, recursion, `malloc`.
+> Supporting the full native C API will be hard. Let's start with the basic stuff that is still plenty to write algorithms. We can then move onto something more versatile. This project will be most successful if we change the user story by the absolute minimal amount. This will enable AI to leverage our tool with no additional setup/instruction/skill. For example, if the entire C API is supported, we can just ask claude to write the algorithm in plain C for step one of the workflow with no additional instruction. For now, support: integer types, arrays, structs, pointers, functions, recursion, malloc.
+
 Not supported in v1: floating point, vector code, I/O, concurrency.
 
 **Unclear:** the exact supported subset of C. It is whatever clang lowers to the LLVM IR
