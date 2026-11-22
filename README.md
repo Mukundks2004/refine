@@ -24,13 +24,17 @@ The planned workflow has five steps:
 
 Write normal C. You don't need to know the model's rules, because operations the model doesn't have as primitives are replaced by library routines with costs that we have already proven.
 
+Example of simple algorithm:
+
 ```c
-// sum.c
-unsigned sum(unsigned *a, unsigned n) {
-    unsigned s = 0;
-    for (unsigned i = 0; i < n; i++)
-        s += a[i];
-    return s;
+int sum(int *arr, int n) {
+    int result = 0;
+
+    for (int i = 0; i < n; i++) {
+        result += arr[i];
+    }
+
+    return result;
 }
 ```
 
