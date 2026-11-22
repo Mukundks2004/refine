@@ -20,7 +20,7 @@ The planned workflow has five steps:
 4. Prove the theorem
 5. Optionally, re-check the bound under a different model
 
-## 1. Write an Algorithm
+## Write an Algorithm
 
 Write normal C. You don't need to know the model's rules, because operations the model doesn't have as primitives are replaced by library routines with costs that we have already proven.
 
@@ -42,12 +42,12 @@ int sum(int *arr, int n) {
 
 > The exact supported subset of C is whatever clang lowers to the LLVM IR instructions that the translator handles, and that list isn't final.
 
-## 2. Translate it
+## Translate it
 
 Run the translation script on your file.
 
 ```sh
-<translate-command> my_code.c
+translate.sh my_code.c
 ```
 
 What the script does:
@@ -58,25 +58,20 @@ What the script does:
 
 > If your program uses something unsupported, e.g., `float`, the script stops with an error naming the bad instruction
 
-## 3. Run it and see the cost
+## Run it and see the cost
 
-The generated program runs inside Lean on concrete inputs. Running it reports the final
-state and the total cost under the chosen cost model.
+The generated program runs inside Lean on concrete inputs. Running it reports the final state and the total cost under the chosen cost model.
 
 ```lean
--- illustrative only
 #eval run baseModel 10000 sum_prog (initState [3, 1, 4, 1, 5])
 ```
 
 This step is for sanity checks, such as testing the program on small inputs or seeing how cost
 grows as you change n. It doesn't prove anything.
 
-**Unclear:** the exact output format.
+## Write the proofs
 
-### 4. Write the proofs
-
-This is the step you do by hand. Lean checks proofs; it can't find them for you, and
-working out a program's complexity automatically is undecidable in general.
+This is the step you do by hand. Working out a program's complexity automatically is undecidable in general (rice's theorem?)
 
 For each program you prove three things:
 
@@ -85,6 +80,12 @@ For each program you prove three things:
 | Correctness     | The program computes the right result on every valid input.        |
 | Exact cost      | The cost is at most an explicit formula, e.g. `C * n * (k + ℓ n)`. |
 | Asymptotic cost | That formula is `O(...)`, using Mathlib's `Asymptotics.IsBigO`.    |
+
+---
+
+Everything after this is an AI generated draft
+
+---
 
 The proof process (planned):
 
