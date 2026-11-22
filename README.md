@@ -75,11 +75,11 @@ This is the step you do by hand. Working out a program's complexity automaticall
 
 For each program you prove three things:
 
-| Theorem         | What it says                                                       |
-| --------------- | ------------------------------------------------------------------ |
-| Correctness     | The program computes the right result on every valid input.        |
-| Exact cost      | The cost is at most an explicit formula, e.g. `C * n * (k + ℓ n)`. |
-| Asymptotic cost | That formula is `O(...)`, using Mathlib's `Asymptotics.IsBigO`.    |
+| Theorem         | What it says                                                        |
+| --------------- | ------------------------------------------------------------------- |
+| Correctness     | The program computes the right result on every valid input.         |
+| Exact cost      | The cost is at most an explicit formula, e.g., `C * n * (k + ℓ n)`. |
+| Asymptotic cost | That formula is `O(...)`, using Mathlib's `Asymptotics.IsBigO`.     |
 
 ---
 
