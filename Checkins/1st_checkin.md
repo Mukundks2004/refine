@@ -2,6 +2,12 @@
 
 Date: TBD
 
-## Questions
+## Points to Bring Up
 
-## Answers
+- Changed bit ram to log ram
+- Changed operations list since we are using log ram
+- Trying to use a full C language as the API
+- Go through README.md esp 'usage', which is effectively our 'failing test' (from BDD perspective)
+-
+
+## Notes
