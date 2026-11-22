@@ -40,39 +40,25 @@ int sum(int *arr, int n) {
 
 > Supporting the full native C API will be hard. Let's start with the basic stuff that is still plenty to write algorithms. We can then move onto something more versatile. This project will be most successful if we change the user story by the absolute minimal amount. This will enable AI to leverage our tool with no additional setup/instruction/skill. For example, if the entire C API is supported, we can just ask claude to write the algorithm in plain C for step one of the workflow with no additional instruction. For now, support: integer types, arrays, structs, pointers, functions, recursion, malloc.
 
-Not supported in v1: floating point, vector code, I/O, concurrency.
+> The exact supported subset of C is whatever clang lowers to the LLVM IR instructions that the translator handles, and that list isn't final.
 
-**Unclear:** the exact supported subset of C. It is whatever clang lowers to the LLVM IR
-instructions the translator handles, and that list isn't final.
-
-### 2. Translate it
+## 2. Translate it
 
 Run the translation script on your file.
 
 ```sh
-<translate-command> sum.c        # name and location TBD
+<translate-command> my_code.c
 ```
 
 What the script does:
 
-1. Runs `clang` with a fixed set of flags to produce LLVM IR (`sum.ll`).
-2. Translates the IR into _model assembly_. Each IR instruction becomes one model
-   primitive or one call to a library routine.
-3. Writes a Lean file containing the translated program.
+1. Runs `clang` with a fixed set of flags to produce LLVM IR (`my_code.ll`).
+2. Translates the IR into _model assembly_ (TODO: can this be an existing assembly?). Each IR instruction becomes one model primitive or one call to a library routine.
+3. Writes a Lean file containing the translated program. It should contain theorem templates (?). Unsure about things like loop invariants.
 
-If your program uses something unsupported, such as a `float`, the script stops with
-an error naming the instruction.
+> If your program uses something unsupported, e.g., `float`, the script stops with an error naming the bad instruction
 
-**Unclear:**
-
-- the command name, and whether the translator is a Lean executable (`lake exe ...`) or an
-  external tool;
-- the exact clang flags;
-- what the generated Lean file contains beyond the program itself (for example, whether
-  it also writes theorem templates for you);
-- how you mark loop invariants: as annotations in the C source, or only in Lean.
-
-### 3. Run it and see the cost
+## 3. Run it and see the cost
 
 The generated program runs inside Lean on concrete inputs. Running it reports the final
 state and the total cost under the chosen cost model.
