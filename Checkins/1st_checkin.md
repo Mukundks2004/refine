@@ -1,6 +1,6 @@
 # 1st Checkin
 
-Date: TBD
+Date: 23/11/2026
 
 ## Points to Bring Up
 

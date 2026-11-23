@@ -1,4 +1,4 @@
-# Refinery
+# Refine
 
 > Nothing here is implemented yet. This describes the planned workflow.
 
